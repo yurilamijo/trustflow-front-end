@@ -8,12 +8,11 @@ function getJwtToken() {
 }
 
 function decodeJwtToken() {
-    const jwt_decode = require('jwt-decode');
-    const token = getJwtToken();
-    const decoded = jwt_decode.jwtDecode(token)
-    console.log(decoded);
+  const jwt_decode = require("jwt-decode");
+  const token = getJwtToken();
+  const decoded = jwt_decode.jwtDecode(token);
 
-    return decoded;
+  return decoded;
 }
 
 function getUserIdFromJwtToken() {

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
+import { getUserIdFromJwtToken } from "../util/helper";
 
 const UserDetails = () => {
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
+    id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -12,22 +12,23 @@ const UserDetails = () => {
     role: "",
   });
 
-  const router = useRouter();
-  const { id } = router.query;
+  const userId = getUserIdFromJwtToken();
 
   useEffect(() => {
-    if (id) {
-      fetch(`http://127.0.0.1:8080/user/${id}`, {
+    if (userId) {
+      fetch(`http://127.0.0.1:8080/user/${userId}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "trustflow_session": localStorage.getItem("sessionToken"),
+          trustflow_session: localStorage.getItem("sessionToken"),
         },
       })
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
           setFormData({
+            id: data.id,
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
@@ -37,7 +38,8 @@ const UserDetails = () => {
         })
         .catch((error) => console.error("Error fetching user:", error));
     }
-  }, [id]);
+  }, [userId]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -47,7 +49,7 @@ const UserDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://127.0.0.1:8080/user/${id}`, {
+    fetch(`http://127.0.0.1:8080/user/update/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
