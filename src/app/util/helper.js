@@ -26,4 +26,4 @@ function getUserRoleFromJwtToken() {
   return token.role;
 }
 
-export { getJwtToken, decodeJwtToken, getUserIdFromJwtToken, getUserRoleFromJwtToken };
+export { getJwtToken, getUserIdFromJwtToken, getUserRoleFromJwtToken };

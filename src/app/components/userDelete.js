@@ -15,7 +15,7 @@ function UserDelete() {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-			"trustflow_session": localStorage.getItem("sessionToken"),
+			      "trustflow_session": localStorage.getItem("sessionToken"),
           },
         }
       );

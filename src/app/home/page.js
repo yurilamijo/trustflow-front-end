@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Logout from "../components/logout";
 import TaskOverview from "../components/taskOverview";
 import UserDelete from "../components/userDelete";
+import UserDetails from "../components/userDetails";
 
 export default function Page() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function Page() {
         <div className="w-full flex justify-center items-center">
           <div className="w-full p-6 bg-white rounded-lg shadow-md">
             <TaskOverview />
+            <UserDetails />
           </div>
         </div>
       </div>
