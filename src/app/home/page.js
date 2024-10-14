@@ -2,7 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import TaskOverview from "../components/TaskOverview";
+import Logout from "../components/logout";
+import TaskOverview from "../components/taskOverview";
+import UserDelete from "../components/userDelete";
 
 export default function Page() {
   const router = useRouter();
@@ -20,27 +22,6 @@ export default function Page() {
     checkAuth();
   }, []);
 
-  const logout = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const sessionToken = localStorage.getItem("sessionToken");
-    
-    try {
-      await fetch("http://127.0.0.1:8080/logout", {
-        method: "get",
-        headers: {
-            "Content-Type": "application/json",
-            "trustflow_session": sessionToken,
-            "Authorization": `Bearer ${accessToken}`,
-          },
-      });
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("sessionToken");
-      router.push("/");
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
-
   return (
     <div className="min-h-screen p-8 pb-20 sm:p-20">
       <nav className="bg-blue-500 text-white py-4 mb-8 rounded-lg ">
@@ -49,12 +30,8 @@ export default function Page() {
             <h1 className="text-xl font-bold">Trustflow Dashboard</h1>
           </div>
           <div className="space-x-4">
-            <button
-              onClick={logout}
-              className="bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200"
-            >
-              Logout
-            </button>
+            <UserDelete />
+            <Logout />
           </div>
         </div>
       </nav>

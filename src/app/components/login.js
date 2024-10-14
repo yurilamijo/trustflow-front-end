@@ -28,7 +28,7 @@ function Login() {
         localStorage.setItem("sessionToken", sessionToken);
 
         console.log("Login successful!");
-        router.push("/dashboard");
+        router.push("/home");
       } else {
         console.error("Login failed");
       }
