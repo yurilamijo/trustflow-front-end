@@ -40,7 +40,6 @@ export default function Page() {
       <div className="grid items-center justify-items-center gap-16">
         <div className="w-full flex justify-center items-center">
           <div className="w-full p-6 bg-white rounded-lg shadow-md">
-            {/* <TaskOverview /> */}
             <UserDetails />
           </div>
         </div>
