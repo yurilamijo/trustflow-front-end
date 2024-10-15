@@ -11,6 +11,7 @@ export default function Home() {
   };
 
   const handleRegistrationSuccess = () => {
+    alert("User register successful!");
     setIsLogin(true);
   };
 

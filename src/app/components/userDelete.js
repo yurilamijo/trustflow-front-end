@@ -15,13 +15,14 @@ function UserDelete() {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${accessToken}`,
-			      "trustflow_session": sessionToken,
+			      trustflow_session: sessionToken,
           },
         }
       );
       if (response.ok) {
         localStorage.removeItem(Token.accessToken);
         localStorage.removeItem(Token.sessionToken);
+        alert("user deleted successfully")
         router.push("/"); 
       } else {
         console.error("Error deleting user");

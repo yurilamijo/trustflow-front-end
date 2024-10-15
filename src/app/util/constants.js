@@ -15,6 +15,7 @@ const APIPaths = {
   register: `${url}/register`,
   allTasks: `${url}/tasks`,
   userDetails: `${url}/user`,
+  allUsers: `${url}/user/byRole`,
   userUpdate: `${url}/user/update`,
   userDelete: `${url}/user/delete`,
 };

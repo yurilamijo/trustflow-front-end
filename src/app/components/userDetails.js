@@ -1,10 +1,10 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { getUserIdFromJwtToken } from "../util/helper";
 import { APIPaths, Token } from "../util/constants";
 
 const UserDetails = () => {
-  const accessToken = localStorage.getItem(Token.accessToken);
-  const sessionToken = localStorage.getItem(Token.sessionToken);
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
     id: "",
@@ -12,7 +12,6 @@ const UserDetails = () => {
     lastName: "",
     email: "",
     dateOfBirth: "",
-    role: "",
   });
 
   const userId = getUserIdFromJwtToken();
@@ -23,8 +22,8 @@ const UserDetails = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-          trustflow_session: sessionToken,
+          Authorization: `Bearer ${localStorage.getItem(Token.accessToken)}`,
+          trustflow_session: localStorage.getItem(Token.sessionToken),
         },
       })
         .then((response) => response.json())
@@ -56,8 +55,8 @@ const UserDetails = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        trustflow_session: sessionToken,
+        Authorization: `Bearer ${localStorage.getItem(Token.accessToken)}`,
+        trustflow_session: localStorage.getItem(Token.sessionToken),
       },
       body: JSON.stringify(formData),
     })
@@ -68,8 +67,8 @@ const UserDetails = () => {
         throw new Error("Failed to update user");
       })
       .then((data) => {
-        alert("User updated successfully!");
         console.log("Updated User:", data);
+        alert("User updated successfully!");
       })
       .catch((error) => {
         console.error("Error updating user:", error);
@@ -122,13 +121,6 @@ const UserDetails = () => {
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md"
           />
-        </div>
-        <div>
-          <label className="block mb-2 text-black">Role:</label>
-          <select name="role" value={formData.role} onChange={handleChange}>
-            <option value="ADMIN">ADMIN</option>
-            <option value="USER">USER</option>
-          </select>
         </div>
         <button
           type="submit"

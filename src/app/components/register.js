@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { APIPaths } from "../util/constants";
 
 function Register({ onSuccess }) {
@@ -9,8 +8,6 @@ function Register({ onSuccess }) {
     username: "",
     password: "",
   });
-  const router = useRouter();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 

@@ -21,6 +21,7 @@ function Logout() {
       });
       localStorage.removeItem(Token.accessToken);
       localStorage.removeItem(Token.sessionToken);
+      alert("log out successfully!");
       router.push("/");
     } catch (error) {
       console.error("Error during logout:", error);

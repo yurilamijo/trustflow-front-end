@@ -3,9 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Logout from "../components/logout";
-import TaskOverview from "../components/taskOverview";
 import UserDelete from "../components/userDelete";
-import UserDetails from "../components/userDetails";
+import HomeContainer from "../components/homeContainer";
 
 export default function Page() {
   const router = useRouter();
@@ -40,7 +39,7 @@ export default function Page() {
       <div className="grid items-center justify-items-center gap-16">
         <div className="w-full flex justify-center items-center">
           <div className="w-full p-6 bg-white rounded-lg shadow-md">
-            <UserDetails />
+            <HomeContainer />
           </div>
         </div>
       </div>

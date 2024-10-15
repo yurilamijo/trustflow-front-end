@@ -1,4 +1,3 @@
-// components/AuthPage.js
 import dynamic from 'next/dynamic';
 
 const Login = dynamic(() => import('./Login'));

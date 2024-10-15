@@ -13,11 +13,11 @@ const TaskOverview = () => {
 
       try {
         const response = await fetch(APIPaths.allTasks, {
-          method: "get",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "trustflow_session": sessionToken,
-            "Authorization": `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
+            trustflow_session: sessionToken,
           },
         });
         const data = await response.json();
@@ -35,12 +35,19 @@ const TaskOverview = () => {
       <h1>Task Overview</h1>
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>
-            <h2>{task.name}</h2>
-            <p>{task.description}</p>
-            <p>
-              <strong>Priority:</strong> {task.priority}
-            </p>
+          <li className="my-2" key={index} style={{ listStyleType: "none" }}>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <label style={{ fontWeight: "bold" }}>Name:</label>
+              <h2 style={{ margin: 0 }}>{task.name}</h2>
+            </div>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <label style={{ fontWeight: "bold" }}>Description:</label>
+              <p style={{ margin: 0 }}>{task.description}</p>
+            </div>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <label style={{ fontWeight: "bold" }}>Priority:</label>
+              <p style={{ margin: 0 }}>{task.priority}</p>
+            </div>
           </li>
         ))}
       </ul>
