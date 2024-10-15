@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { APIPaths, Token } from "../util/constants";
 
 const TaskOverview = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const accessToken = localStorage.getItem("accessToken");
-      const sessionToken = localStorage.getItem("sessionToken");
+      const accessToken = localStorage.getItem(Token.accessToken);
+      const sessionToken = localStorage.getItem(Token.sessionToken);
 
       try {
-        const response = await fetch("http://127.0.0.1:8080/tasks", {
+        const response = await fetch(APIPaths.allTasks, {
           method: "get",
           headers: {
             "Content-Type": "application/json",

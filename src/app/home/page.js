@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Logout from "../components/logout";
 import TaskOverview from "../components/taskOverview";
 import UserDelete from "../components/userDelete";
@@ -40,7 +40,7 @@ export default function Page() {
       <div className="grid items-center justify-items-center gap-16">
         <div className="w-full flex justify-center items-center">
           <div className="w-full p-6 bg-white rounded-lg shadow-md">
-            <TaskOverview />
+            {/* <TaskOverview /> */}
             <UserDetails />
           </div>
         </div>

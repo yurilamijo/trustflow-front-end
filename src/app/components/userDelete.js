@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { getUserIdFromJwtToken } from "../util/helper";
+import { APIPaths, Token } from "../util/constants";
 
 function UserDelete() {
   const router = useRouter();
@@ -7,21 +8,20 @@ function UserDelete() {
   const deleteUser = async () => {
     try {
       var userId = getUserIdFromJwtToken();
-      console.log(userId);
+      const accessToken = localStorage.getItem(Token.accessToken);
+      const sessionToken = localStorage.getItem(Token.sessionToken);
 
-      const response = await fetch(
-        `http://127.0.0.1:8080/user/delete/${userId}`,
-        {
+      const response = await fetch(`${APIPaths.userDelete}/${userId}`, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-			      "trustflow_session": localStorage.getItem("sessionToken"),
+            Authorization: `Bearer ${accessToken}`,
+			      "trustflow_session": sessionToken,
           },
         }
       );
       if (response.ok) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("sessionToken");
+        localStorage.removeItem(Token.accessToken);
+        localStorage.removeItem(Token.sessionToken);
         router.push("/"); 
       } else {
         console.error("Error deleting user");

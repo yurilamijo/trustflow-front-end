@@ -1,25 +1,26 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { APIPaths, Token } from "../util/constants";
 
 function Logout() {
   const router = useRouter();
 
   const logout = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const sessionToken = localStorage.getItem("sessionToken");
+    const accessToken = localStorage.getItem(Token.accessToken);
+    const sessionToken = localStorage.getItem(Token.sessionToken);
 
     try {
-      await fetch("http://127.0.0.1:8080/logout", {
-        method: "get",
+      await fetch(APIPaths.logout, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           trustflow_session: sessionToken,
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("sessionToken");
+      localStorage.removeItem(Token.accessToken);
+      localStorage.removeItem(Token.sessionToken);
       router.push("/");
     } catch (error) {
       console.error("Error during logout:", error);

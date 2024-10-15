@@ -1,7 +1,6 @@
-"use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { APIPaths, CustomHeaders, Token } from "../util/constants";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -12,7 +11,7 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:8080/login", {
+      const response = await fetch(APIPaths.login, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,10 +21,10 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        const sessionToken = response.headers.get("trustflow_session");
+        const sessionToken = response.headers.get(CustomHeaders.trustflowSession);
 
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("sessionToken", sessionToken);
+        localStorage.setItem(Token.accessToken, data.accessToken);
+        localStorage.setItem(Token.sessionToken, sessionToken);
 
         console.log("Login successful!");
         router.push("/home");
@@ -68,7 +67,7 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 my-2"
           >
             Login
           </button>
